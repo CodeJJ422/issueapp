@@ -36,7 +36,7 @@ public class IssueController {
             model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
-        return "redirect/";
+        return "redirect:/";
     }
 
     @GetMapping("/issues/{id}")
@@ -49,6 +49,12 @@ public class IssueController {
     @PostMapping("/issues/{id}/update")
     public String updateIssue(@PathVariable long id, IssueForm issueForm){
         issueRepository.update(id, issueForm.getTitle(), issueForm.getContent(), issueForm.getPeriod(), issueForm.getImportance());
+        return "redirect:/";
+    }
+
+    @PostMapping("issues/{id}/delete")
+    public String deleteIssue(@PathVariable Long id){
+        issueRepository.deleteById(id);
         return "redirect:/";
     }
 }
